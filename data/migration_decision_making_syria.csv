@@ -1,0 +1,70 @@
+﻿Neighborhood of Syria,Civilian Group,Population,"Mood at Week 1 (October 1, 2019)","Security at Week 1 (October 1, 2019)",Vertical Relationship to Syrian Government Actor (Week 1),Vertical Relationship to Turkish Government Actor (Week 1),Vertical Relationship to US Government Actor (Week 1),Vertical Relationship to Kurdish Actor (Week 1),Vertical Relationship to ISIL Actor (Week 1)
+Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts),Syrian Kurds of Aleppo and Idlib (CSYAIKRD),"920,040",Dissatisfied: -42.85,None: -64,0.040893854,-0.052708697,0.288003205,0.657115489,-0.478255703
+Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts),Syrian Sunni Secular Separatist Supporters of Aleppo and Idlib (CSYAISSP),"1,176,180",Dissatisfied: -25.94,None: -40,-0.557965482,-0.315142355,-0.257698646,-0.430843219,-0.031532569
+Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts),Syrian Sunni Neutrals of Aleppo and Idlib (CSYAISUN),"585,098",Dissatisfied: -44.35,None: -39,-0.062916109,0.132514146,0.02002401,0.044768913,0.11095445
+Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts),Syrian Violent Salafist Supporters of Aleppo and Idlib (CSYAIVSF),"1,582,848",Satisfied: 28.52,None: -39,-0.589311405,-0.45238132,-0.487235073,-0.562462588,
+Aleppo City [NSYAICIT] (Mount Simeon / Jabal Sem’an District of Aleppo Governorate),Syrian Kurds of Aleppo City (CSYAIALCITKRD),"70,823",Ambivalent: -8.32,None: -27,0.040893854,-0.052708697,0.249363109,0.597115489,-0.478255703
+Aleppo City [NSYAICIT] (Mount Simeon / Jabal Sem’an District of Aleppo Governorate),Syrian Sunni Neutrals of Aleppo City (CSYAIALCITSUN),"321,390",Ambivalent: -13.10,None: -46,-0.062916109,0.132514146,0.02002401,0.044768913,0.11095445
+Aleppo City [NSYAICIT] (Mount Simeon / Jabal Sem’an District of Aleppo Governorate),Syrian Sunni Unionists of Aleppo City (CSYAIALCITSUU),"2,175,296",Ambivalent: -14.13,Low: -9,0.482210623,0.059260471,-0.028842345,0.113703459,-0.410981067
+Deir Az Zur [NSYBCDZ] (Deir Az Zur Governorate),Syrian Sunni Neutral IDPs of Deir Az Zur (CSYBCDZIDP),"255,000",Very Dissatisfied: -79.93,None: -34,0.189562392,0.433578519,0.437180369,0.352331306,0.142060899
+Deir Az Zur [NSYBCDZ] (Deir Az Zur Governorate),Syrian Passive Salafists of Deir Az Zur (CSYBCDZPSF),"219,586",Very Dissatisfied: -80.64,None: -38,-0.243438784,0.088100089,0.024368258,-0.140017028,0.285571479
+Deir Az Zur [NSYBCDZ] (Deir Az Zur Governorate),Syrian Sunni Neutrals of Deir Az Zur (CSYBCDZSUN),"332,393",Very Dissatisfied: -80.57,None: -37,-0.062916109,0.132514146,0.02002401,0.092530467,0.11095445
+Deir Az Zur [NSYBCDZ] (Deir Az Zur Governorate),Syria Sunni Unionists of Deir Az Zur (CSYBCDZSUU),"32,938",Ambivalent: -6.34,None: -37,0.173517414,0.315372425,0.354417326,0.299684543,0.062840978
+Hasakah [NSYBCHA] (Hasakah Governorate),Syrian Kurds of Hasakah (CSYBCHAKRD),"635,040",Satisfied: 20.79,High: 29,0.040893854,-0.052708697,0.249363109,0.680976009,-0.478255703
+Hasakah [NSYBCHA] (Hasakah Governorate),Syrian Levantine Christians of Hasakah (CSYBCHALVC),"105,840",Very Dissatisfied: -77.85,Medium: 8,0.492234748,-0.156618518,-0.13107641,0.220277466,-0.569797751
+Hasakah [NSYBCHA] (Hasakah Governorate),Syrian Violent Salafist IDPs of Hasakah (Al-Hawl) (CSYBCHAVSFIDP),"70,000",Very Dissatisfied: -79.95,None: -57,-0.589311405,-0.45238132,-0.487235073,-0.505122485,0.635012267
+Hasakah [NSYBCHA] (Hasakah Governorate),Syrian Sunni Neutrals of Hasakah (CSYBCHASUN),"317,520",Very Dissatisfied: -79.96,None: -41,-0.062916109,0.132514146,0.02002401,0.092530467,0.11095445
+Raqqa City [NSYBCRACIT] (Raqqa district of Raqqa Governorate and city),Syrian Passive Salafists of Raqqa City (CSYBCRACITPSF),"278,186",Very Dissatisfied: -79.92,None: -42,-0.243438784,0.088100089,0.024368258,-0.083016177,0.285571479
+Raqqa City [NSYBCRACIT] (Raqqa district of Raqqa Governorate and city),Syrian Sunni Neutral IDPs of Raqqa City (CSYBCRACITIDP),"23,160",Very Dissatisfied: -78.72,None: -33,0.189562392,0.433578519,0.437180369,0.384714741,
+Raqqa Greater [NSYBCRA] (Raqqa Governorate minus Raqqa district plus Aleppo Governorate district Ayn al Arab),Syrian Kurds of Raqqa Greater (CSYBCRAKRD),"94,883",Satisfied: 22.02,High: 32,0.040893854,-0.052708697,0.249363109,0.680976009,-0.478255703
+Raqqa Greater [NSYBCRA] (Raqqa Governorate minus Raqqa district plus Aleppo Governorate district Ayn al Arab),Syrian Passive Salafists of Raqqa Greater (CSYBCRAPSF),"120,818",Very Dissatisfied: -80.28,None: -45,-0.243438784,0.088100089,0.024368258,-0.083016177,0.247004335
+Raqqa Greater [NSYBCRA] (Raqqa Governorate minus Raqqa district plus Aleppo Governorate district Ayn al Arab),Syrian Sunni Neutral IDPs of Raqqa Greater (CSYBCRASUN),"50,000",Very Dissatisfied: -76.40,None: -35,0.153875521,0.390571164,0.394064958,0.415479004,0.142060899
+Raqqa Greater Turkish Safe Zone [NSYBCRASZ] (Turkish occupied northern Raqqa and Hasakah Governorates),Syrian Passive Salafists of Turkish Safe Zone (CSYBCRASZPSF),"225,008",Very Dissatisfied: -79.68,None: -41,-0.243438784,0.088100089,0.024368258,-0.140017028,0.247004335
+Raqqa Greater Turkish Safe Zone [NSYBCRASZ] (Turkish occupied northern Raqqa and Hasakah Governorates),Syrian Kurds of the Turkish Safe Zone (CSYBCRASZKRD),"100,000",Very Dissatisfied: -74.52,High: 46,-0.243438784,0.088100089,0.024368258,-0.140017028,0.247004335
+Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)),Syrian Druze of Rif Dimashq Governorate (CSYDDDRZ),"71,231",Ambivalent: 2.10,High: 33,0.439262343,0.093181747,-0.055983309,0.15623522,-0.470112081
+Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)),Syrian Ethnic Others of Rif Dimashq Governorate (CSYDDETO),"71,230",Ambivalent: 3.39,High: 67,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)),Syrian Levantine Christians of Rif Dimashq Governorate (CSYDDLVC),"118,717",Ambivalent: 2.73,High: 67,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)),Syrian Sunni Neutrals of Rif Dimashq Governorate (CSYDDSUN),"47,491",Ambivalent: -2.07,None: -36,-0.062916109,0.132514146,0.02002401,0.044768913,0.11095445
+Daraa Governorate (Daraa Governorate minus the population of Daraa City),Syrian Druze of Daraa Governorate (CSYDDDADRZ),"150,058",Ambivalent: 1.94,High: 27,0.439262343,0.093181747,-0.055983309,0.15623522,-0.470112081
+Daraa Governorate (Daraa Governorate minus the population of Daraa City),Syrian Levantine Christians of Daraa Governorate (CSYDDDALVC),"162,643",Ambivalent: 2.35,High: 56,0.561467021,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Daraa Governorate (Daraa Governorate minus the population of Daraa City),Syrian Sunni Neutrals of Daraa Governorate (CSYDDDASUN),"1,053,058",Ambivalent: -2.02,None: -29,-0.062916109,0.132514146,0.02002401,0.044768913,0.11095445
+Daraa Governorate (Daraa Governorate minus the population of Daraa City),Syrian Sunni Unionists of Daraa Governorate (CSYDDDASUU),"162,644",Ambivalent: 1.45,High: 30,0.482210623,0.059260471,-0.028842345,0.113703459,-0.410981067
+Daraa City [NSYDDDACIT] (Daraa District),Syrian Levantine Christians of Daraa City (CSYDDDACITLVC),"34,264",Ambivalent: 3.28,High: 65,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Daraa City [NSYDDDACIT] (Daraa District),Syrian Sunni Unionists of Daraa City (CSYDDDACITSUU),"34,268",Ambivalent: 2.32,High: 37,0.55987903,0.059260471,-0.028842345,0.113703459,-0.410981067
+Damascus City [NSYDDDMCIT] (Damascus Governorate),Syrian Alawites of Damascus City (CSYDDDMCITALA),"806,350",Ambivalent: 1.28,High: 64,0.412334807,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Damascus City [NSYDDDMCIT] (Damascus Governorate),Syrian Levantine Christians of Damascus City (CSYDDDMCITLVC),"297,225",Ambivalent: 1.28,High: 64,0.412334807,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Damascus City [NSYDDDMCIT] (Damascus Governorate),Syrian Sunni Neutrals of Damascus City (CSYDDDMCITSUN),"149,572",Ambivalent: -5.00,None: -33,-0.209452603,0.132514146,0.02002401,0.044768913,0.11095445
+Damascus City [NSYDDDMCIT] (Damascus Governorate),Syrian Sunni Unionists of Damascus City (CSYDDDMCITSUU),"1,096,853",Ambivalent: -1.69,High: 36,0.335742885,0.242560967,0.152489444,0.19537032,-0.340960104
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Alawites of Homs and Hama (CSYHHALA),"208,728",Ambivalent: 2.10,Low: -15,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Druze of Homs and Hama (CSYHHDRZ),"40,015",Ambivalent: 1.70,Low: -17,0.523372991,0.093181747,-0.055983309,0.15623522,-0.470112081
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Ethnic Others of Homs and Hama (CSYHHETO),"1,201,102",Ambivalent: 1.70,Low: -17,0.523372991,0.093181747,-0.055983309,0.15623522,-0.470112081
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Kurds of Homs and Hama (CSYHHKRD),"30,012",Ambivalent: -0.32,Low: -22,0.184759776,-0.052708697,0.249363109,0.597115489,-0.478255703
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Levantine Christians of Homs and Hama (CSYHHLVC),"626,175",Ambivalent: 2.10,Low: -15,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Sunni Secular Separatist Supporters of Homs and Hama (CSYHHSSP),"687,688",Ambivalent: -5.88,None: -63,-0.580067208,-0.315142355,-0.257698646,-0.430843219,-0.031532569
+Homs and Hama [NSYHH] (Homs and Hama Governorates),Syrian Sunni Unionists of Homs and Hama (CSYHHSUU),"561,780",Ambivalent: 1.36,Low: -18,0.55987903,0.205284138,0.117914761,0.15950921,-0.340960104
+Latakia [NSYLT] (Latakia Governorate),Syrian Alawites of Latakia (CSYLTALA),"1,278,486",Ambivalent: 1.09,High: 66,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Latakia [NSYLT] (Latakia Governorate),Syrian Ethnic Others of Latakia (CSYLTETO),"15,006",Ambivalent: 1.61,High: 33,0.523372991,0.093181747,-0.055983309,0.15623522,-0.470112081
+Latakia [NSYLT] (Latakia Governorate),Syrian Kurds of Latakia (CSYLTKRD),"13,005",Ambivalent: 0.17,Medium: 8,0.184759776,-0.052708697,0.249363109,0.597115489,-0.478255703
+Latakia [NSYLT] (Latakia Governorate),Syrian Levantine Christians of Latakia (CSYLTLVC),"8,003",Ambivalent: 1.36,High: 58,0.564570376,-0.141333294,-0.099271467,0.135928339,-0.556838493
+Latakia [NSYLT] (Latakia Governorate),Syrian Sunni Secular Separatist Supporters of Latakia (CSYLTSSP),"8,003",Ambivalent: -5.48,None: -47,-0.580067208,-0.315142355,-0.257698646,-0.430843219,-0.031532569
+Latakia [NSYLT] (Latakia Governorate),Syrian Sunni Unionists of Latakia (CSYLTSUU),"50,019",Ambivalent: 1.92,High: 35,0.55987903,0.205284138,0.117914761,0.15950921,-0.340960104
+Latakia [NSYLT] (Latakia Governorate),Syrian Violent Salafist Supporters of Latakia (CSYLTVSF),"2,000",Dissatisfied: -22.58,None: -55,-0.609845834,-0.45238132,-0.487235073,-0.562462588,0.635012267
+Suwayda [NSYSU] (Suwayda Governorate),Syrian Druze of Suwayda (CSYSUDRZ),"270,304",Ambivalent: -1.10,High: 37,0.523372991,0.093181747,-0.055983309,0.15623522,-0.470112081
+Suwayda [NSYSU] (Suwayda Governorate),Syrian Ethnic Others of Suwayda (CSYSUETO),"64,025",Ambivalent: -5.41,None: -33,0.523372991,0.093181747,-0.055983309,0.15623522,-0.470112081
+Suwayda [NSYSU] (Suwayda Governorate),Syrian Levantine Christians of Suwayda (CSYSULVC),"66,289",Ambivalent: -0.91,High: 65,0.627246968,-0.156618518,-0.13107641,0.133641629,-0.569797751
+Suwayda [NSYSU] (Suwayda Governorate),Syrian Sunni Neutrals of Suwayda (CSYSUSUN),"12,955",Ambivalent: -5.41,None: -33,-0.062916109,0.132514146,0.02002401,0.044768913,0.11095445
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

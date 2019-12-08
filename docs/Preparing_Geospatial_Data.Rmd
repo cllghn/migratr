@@ -1,0 +1,258 @@
+---
+title: "Preprocess Data"
+author: "Chris Callaghan - CORE Lab"
+date: "12/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo    = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(raster)
+library(sf)
+library(tidyverse)
+library(igraph)
+library(maps)
+```
+
+## Generating Polygon Adjacency Matrix
+
+Get governorate polygons:
+
+```{r}
+syria_governorate <- raster::getData("GADM", country = "SYR", level = 1) %>%
+  sf::st_as_sf()
+```
+
+Add polygon ids from Athena:
+
+```{r}
+syria_governorate <- syria_governorate %>%
+  mutate(neighborhood_id = case_when(NAME_1 == "Al Ḥasakah" ~ "Hasakah [NSYBCHA] (Hasakah Governorate)",
+                                     NAME_1 == "Aleppo" ~ "Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts)",
+                                     NAME_1 == "Ar Raqqah" ~ "Raqqa Greater [NSYBCRA] (Raqqa Governorate minus Raqqa district plus Aleppo Governorate district Ayn al Arab)",
+                                     NAME_1 == "As Suwayda'" ~ "Suwayda [NSYSU] (Suwayda Governorate)",
+                                     NAME_1 == "Damascus" ~ "Damascus City [NSYDDDMCIT] (Damascus Governorate)",
+                                     NAME_1 == "Dar`a" ~ "Daraa Governorate (Daraa Governorate minus the population of Daraa City)",
+                                     NAME_1 == "Dayr Az Zawr" ~ "Deir Az Zur [NSYBCDZ] (Deir Az Zur Governorate)",
+                                     NAME_1 == "Hamah" ~ "Homs and Hama [NSYHH] (Homs and Hama Governorates)",
+                                     NAME_1 == "Hims" ~ "Homs and Hama [NSYHH] (Homs and Hama Governorates)",
+                                     NAME_1 == "Idlib" ~ "Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts)",
+                                     NAME_1 == "Lattakia" ~ "Latakia [NSYLT] (Latakia Governorate)",
+                                     NAME_1 == "Quneitra" ~ "Daraa Governorate (Daraa Governorate minus the population of Daraa City)",
+                                     NAME_1 == "Rif Dimashq" ~ "Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)",
+                                     NAME_1 == "Tartus" ~ "Latakia [NSYLT] (Latakia Governorate)")) %>%
+  dplyr::select(neighborhood_id) 
+```
+```{r, echo=FALSE}
+plot(syria_governorate)
+```
+
+
+Get city coordinates for Aleppo, Raqqah, and Dar'a City, then add a buffer to transform them into polygons:
+
+```{r}
+syria_cities <- maps::world.cities %>%
+  filter(name == "Dar'a" | name == "Aleppo" | name == "ar-Raqqah") %>%
+  mutate(neighborhood_id = case_when(name == "Aleppo"    ~ "Aleppo City [NSYAICIT] (Mount Simeon / Jabal Sem’an District of Aleppo Governorate)",
+                                     name == "Dar'a"     ~ "Daraa City [NSYDDDACIT] (Daraa District)",
+                                     name == "ar-Raqqah" ~ "Raqqa City [NSYBCRACIT] (Raqqa district of Raqqa Governorate and city)")) %>%
+  sf::st_as_sf(coords = c("long", "lat"),
+               crs = st_crs(syria_governorate)) %>%
+  sf::st_buffer(dist = .05) %>%
+  dplyr::select(neighborhood_id)
+```
+```{r, echo=FALSE}
+plot(syria_cities)
+```
+
+Lastly, add a polygon for the Turkish Safe Zone East:
+# ```{r echo = FALSE}
+# knitr::include_graphics(here::here("docs/img/map.png"))
+# ```
+
+```{r, eval = FALSE}
+# Info here: https://www.r-spatial.org/r/2017/01/30/mapedit_intro.html
+library(mapview)
+library(mapedit)
+safe_zone <- mapview() %>%
+  editMap()
+mapview(safe_zone$finished)
+safe_zone <- safe_zone$drawn %>%
+  mutate(neighborhood_id = "Raqqa Greater Turkish Safe Zone [NSYBCRASZ] (Turkish occupied northern Raqqa and Hasakah Governorates)") %>%
+  dplyr::select(neighborhood_id)
+```
+
+```{r, echo = FALSE}
+#saveRDS(safe_zone, file = here::here("data/safe_zone.rds"))
+safe_zone <- readRDS(here::here("data/safe_zone.rds"))
+plot(safe_zone)
+```
+
+Join the cities, governorates, and safe zone. Then unionize neighborhood ids:
+```{r}
+syria_merged <- rbind(syria_governorate, syria_cities, safe_zone) %>%
+  group_by(neighborhood_id) %>%
+  summarise(geometry = sf::st_combine(geometry)) %>%
+  ungroup() 
+```
+
+Using this merged data frame, generate an adjacency matrix for polygons:
+```{r}
+intersection_matrix <- as.matrix(st_intersects(syria_merged, sparse = FALSE))
+row.names(intersection_matrix) <- syria_merged$neighborhood_id
+colnames(intersection_matrix) <- syria_merged$neighborhood_id
+intersection_matrix <- ifelse(intersection_matrix == TRUE, 1, 0)
+```
+
+The `intersection_matrix` can be graphed as a uni-mode matrix where nodes represent polygons, like so:
+```{r}
+g_adj_poly <- igraph::graph_from_adjacency_matrix(intersection_matrix,
+                                                  mode = "undirected",
+                                                  diag = FALSE)
+plot.igraph(g_adj_poly,
+            vertex.label.cex = 0.3)
+```
+
+
+## Process Demographic Data
+
+First load and inspect the data:
+```{r, message = FALSE}
+df <- readr::read_csv(here::here("data/migration_decision_making_syria.csv")) %>%
+  glimpse()
+```
+
+Some of the strings can be cleaned up a bit, namely the `Civilian Group` string as it includes the group of interest and a location. Thus, making each group attached to a location a unique value. In order to determined shared ethnic group membership between polygons, the location portion of the `Civilian Group` string must be dropped.
+```{r}
+df_clean <- df %>%
+  mutate(
+    group           = str_extract(`Civilian Group`,
+                                       "^(.*?)(?=\\sof)")#,
+    # neighborhood_id = str_extract(`Neighborhood of Syria`,
+    #                                    "(?<=\\[)(.*?)(?=\\])"),
+    # group_id        = str_extract(`Civilian Group`,
+    #                                    "(?<=\\()(\\w+)(?=\\)$)"),
+         ) %>%
+  dplyr::select(neighborhood_id = `Neighborhood of Syria`, group)
+```
+
+From the edge list generated above, we can create a bipartate graph that can be in turn projected to create one-mode graph between polygons sharing one or more ethnic groups:
+
+```{r}
+g_bip <- igraph::graph_from_data_frame(df_clean[1:54, 1:2])
+V(g_bip)$type <- bipartite_mapping(g_bip)$type 
+prov_prov <- bipartite_projection(g_bip)$proj1
+```
+
+```{r, echo=FALSE}
+plot.igraph(prov_prov,
+            vertex.label.cex = 0.3)
+```
+
+```{r}
+prov_mat <- as.matrix(get.adjacency(prov_prov))
+```
+
+
+## Aggregating Demographic Data and Polygon Adjacency
+
+First, sum up both matrices:
+
+```{r}
+sum_matrix <- matrix(
+  mapply(sum,
+         prov_mat,
+         intersection_matrix,
+         MoreArgs=list(na.rm=T)),
+  ncol = NROW(intersection_matrix)
+  )
+```
+
+Clean up the matrix to include only edges with a value of 2 or more:
+
+```{r}
+sum_matrix <- ifelse(sum_matrix > 1, 1, 0)
+rownames(sum_matrix) <- rownames(intersection_matrix)
+colnames(sum_matrix) <- colnames(intersection_matrix)
+```
+
+Generate a graph from this matrix
+```{r}
+g_sum_matrix <- igraph::graph_from_adjacency_matrix(sum_matrix)
+visNetwork::visIgraph(g_sum_matrix)
+```
+
+Generate a map with these nodes and the coordinates from the `sf` object used in the first section:
+```{r}
+coords <- do.call(rbind, st_geometry(st_centroid(syria_merged))) %>% 
+  as_tibble() %>%
+  setNames(c("lon","lat")) %>%
+  mutate(id = syria_merged$neighborhood_id)
+edges <- get.data.frame(g_sum_matrix, "edges")
+
+edges_geom <- edges %>%
+  inner_join(coords %>% select(id, lon, lat), by = c('from' = 'id')) %>%
+  rename(x = lon, y = lat) %>%
+  inner_join(coords %>% select(id, lon, lat), by = c('to' = 'id')) %>%
+  rename(xend = lon, yend = lat)
+
+syria <- raster::getData(name = "GADM", country = "Syria", level = 1) %>%
+  st_as_sf()
+
+mycolors = c(RColorBrewer::brewer.pal(name="Dark2", n = 8), RColorBrewer::brewer.pal(name="Paired", n = 6))
+
+ggplot() +
+  theme_minimal() +
+  geom_sf(data = syria_merged, show.legend = FALSE, aes(fill = neighborhood_id)) +
+  geom_curve(data = edges_geom, aes(x = x, y = y, xend = xend, yend = yend),
+             curvature = 0, alpha = 0.5) +
+  geom_point(aes(x = lon, y = lat),
+             size = 1.4,
+             colour = "white",
+             data = coords) +
+  geom_point(aes(x = lon, y = lat#,
+                 #colour = factor(id)
+                 ),
+             size = 1,
+             colour = "black",
+             data = coords,
+             show.legend = FALSE) +
+  scale_color_manual(values = mycolors)
+ 
+```
+
+
+## Wrapping into functions
+
+First, wrap the geospatial functions into programmatic solutions:
+
+```{r}
+get_country_provinces <- function(iso3_code) {
+  if (!is.character(iso3_code)) {
+    stop("iso3_code must be a character",
+         call. = FALSE)
+  }
+  sf::st_as_sf(
+    raster::getData(
+      "GADM", country = iso3_code, level = 1
+      )
+               )
+}
+
+get_country_cities <- function(iso3_code) {
+  ### TO DO:
+  # Match the city df with the ISO code for subsetting
+  ###
+}
+```
+
+
+
+
+
+
