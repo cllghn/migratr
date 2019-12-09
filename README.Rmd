@@ -20,6 +20,20 @@ knitr::opts_chunk$set(
 
 A set of tools for unifying **{sf}** and **{igraph}** object for geospatial network analysis.
 
+## Install
+
+First, if you haven’t done so, install `remotes`:
+
+```{r, eval=FALSE}
+install.packages("remotes")
+```
+
+Proceed to install **{migratr}** from Github:
+```{r, eval=FALSE}
+remotes::install_github("cjcallag/migratr")
+```
+
+
 ## Example
 
 The goal is to create representations of network both projected over a map or as a sociogram. Because the network is the unit of analysis, the functions are designed to work with both a edge and node list.
