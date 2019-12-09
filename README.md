@@ -4,6 +4,20 @@
 A set of tools for unifying **{sf}** and **{igraph}** object for
 geospatial network analysis.
 
+## Install
+
+First, if you haven’t done so, install `remotes`:
+
+``` r
+install.packages("remotes")
+```
+
+Proceed to install **{migratr}** from Github:
+
+``` r
+remotes::install_github("cjcallag/migratr")
+```
+
 ## Example
 
 The goal is to create representations of network both projected over a
@@ -77,4 +91,4 @@ Plot `migratr_object`:
 plot(migratr_object)
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
