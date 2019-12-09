@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_process.R
 \name{add_centroid}
 \alias{add_centroid}
-\title{\code{get_centroid}}
+\title{\code{add_centroid}}
 \usage{
 add_centroid(df)
 }

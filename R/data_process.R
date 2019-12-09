@@ -1,6 +1,6 @@
 #' @title \code{get_proto_graph}
 #'
-#' @description 
+#' @description Produce a \code{proto_graph} object that can be laid as a network, map, or geocoded network on a map.
 #'
 #' @author Christopher Callaghan, \email{cjcallag@@nps.edu}
 #'
@@ -23,7 +23,7 @@ get_proto_graph <- function(edges, nodes, directed = FALSE, centroid = TRUE) {
     stop("nodes not a data.frame.",
          call. = FALSE)
   }
-  if (!is(nodes, "sf")) {
+  if (!inherits(nodes, "sf")) {
    stop("nodes are not sf class.") 
   }
   if (!is.data.frame(edges)) {
@@ -42,22 +42,42 @@ get_proto_graph <- function(edges, nodes, directed = FALSE, centroid = TRUE) {
   out <- list("graph"  = igraph::graph_from_data_frame(edges,
                                                        directed = directed,
                                                        vertices = nodes),
-              "nodes" = ifelse(centroid,
-                               add_centroid(nodes),
-                               nodes)
+              "geo_nodes" = if (centroid == TRUE) {
+                add_centroid(nodes)
+              } else {nodes},
+              "geo_edges" = if (centroid == TRUE) {
+                get_geo_edges(edges = edges,
+                              nodes = add_centroid(nodes),
+                              .centroid_latitude  = 'centroid_latitude',
+                              .centroid_longitude = 'centroid_longitude')
+              } else {
+                if (
+                  any(
+                    !c("centroid_latitude",
+                       "centroid_longitude") %in% names(nodes))
+                  ) {
+                  stop("Centroid latidude and longitude must be recorded as centroid_latitude and centroid_latitude on the nodelist; othersise, use TRUE on the centroid argument.",
+                       call. = FALSE) 
+                  }
+                get_geo_edges(edges = edges,
+                              nodes = nodes,
+                              .centroid_latitude  = 'centroid_latitude',
+                              .centroid_longitude = 'centroid_longitude')
+                }
               )
   
   class(out) <- "proto_graph"
   out
 }
 
-#' @title \code{get_centroid}
+#' @title \code{add_centroid}
 #'
 #' @description Geometric operation on simple feature geometry to add coordinates for feature centroid.
 #'
 #' @author Christopher Callaghan, \email{cjcallag@@nps.edu}
 #' 
 #' @importFrom sf st_centroid st_geometry
+#' @importFrom stats setNames
 #'
 #' @param df an object of class \code{sf}
 #' 
@@ -86,10 +106,42 @@ add_centroid <- function(df) {
   df
 }
 
-# edges_geom <- edges %>%
-#   inner_join(coords %>% select(id, lon, lat), by = c('from' = 'id')) %>%
-#   rename(x = lon, y = lat) %>%
-#   inner_join(coords %>% select(id, lon, lat), by = c('to' = 'id')) %>%
-#   rename(xend = lon, yend = lat)
-
-
+#' @title \code{get_geo_edges}
+#'
+#' @description Geometric operation on simple feature geometry to add coordinates for start and end point coordinates for each edge.
+#'
+#' @author Christopher Callaghan, \email{cjcallag@@nps.edu}
+#' 
+#' @importFrom dplyr left_join select rename
+#' @importFrom sf st_geometry
+#' @importFrom magrittr %>%
+#' @importFrom rlang !!! syms set_names
+#'
+#' @param edges ...
+#' @param nodes ...
+#' @param .centroid_latitude ...
+#' @param .centroid_longitude ...
+#' 
+get_geo_edges <- function(edges, nodes, .centroid_latitude, .centroid_longitude) {
+  
+  sf::st_geometry(nodes) <- NULL
+  id <- names(nodes[1])
+  out_cols <- syms(c(id, .centroid_latitude, .centroid_longitude))
+  
+  nodes_temp <- nodes %>%
+    select(!!!out_cols) %>%
+    set_names( c("id", "latitude", "longitude") )
+  print(nodes_temp)
+  
+  edges_temp <- edges[1:2]
+  colnames(edges_temp) <- c("from", "to")
+  
+  from <- names(edges_temp[1])
+  to   <- names(edges_temp[2])
+  
+  geo_edges <- edges_temp %>%
+    left_join(nodes_temp, by = c(from = 'id'), suffix = c("_start", "_end")) %>%
+    left_join(nodes_temp, by = c(to = 'id'), suffix = c("_start", "_end"))
+  
+  geo_edges
+}

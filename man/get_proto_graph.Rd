@@ -16,7 +16,7 @@ get_proto_graph(edges, nodes, directed = FALSE, centroid = TRUE)
 \item{centroid}{Logical, whether or not to calculate the centroid for each geometry in the \code{nodes}. See details below.}
 }
 \description{
-\code{get_proto_graph}
+Produce a \code{proto_graph} object that can be laid as a network, map, or geocoded network on a map.
 }
 \details{
 \code{nodes} must be a \code{data.frame} with vertex metadata. THe first column of the table is assume to contain the symbolic vertex names, this will be added to the graphs as the 'name' vertex attribute. Additionally, as an object of class \code{sf} it must include the intended geometry for each vertex.

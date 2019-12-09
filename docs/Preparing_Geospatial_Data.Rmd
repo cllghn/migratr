@@ -44,7 +44,7 @@ syria_governorate <- syria_governorate %>%
                                      NAME_1 == "Idlib" ~ "Aleppo and Idlib Province [NSYAI] (Halab and Idlib governorates minus Aleppo City and Ayn al Arab Halab governorate districts)",
                                      NAME_1 == "Lattakia" ~ "Latakia [NSYLT] (Latakia Governorate)",
                                      NAME_1 == "Quneitra" ~ "Daraa Governorate (Daraa Governorate minus the population of Daraa City)",
-                                     NAME_1 == "Rif Dimashq" ~ "Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate)",
+                                     NAME_1 == "Rif Dimashq" ~ "Damascus Governorate [NSYDD] (Rif Dimashq Governorate (minus the population of Damascus Governorate))",
                                      NAME_1 == "Tartus" ~ "Latakia [NSYLT] (Latakia Governorate)")) %>%
   dplyr::select(neighborhood_id) 
 ```
@@ -99,6 +99,7 @@ syria_merged <- rbind(syria_governorate, syria_cities, safe_zone) %>%
   group_by(neighborhood_id) %>%
   summarise(geometry = sf::st_combine(geometry)) %>%
   ungroup() 
+# saveRDS(syria_merged, file = here::here("data/syria_merged.rds"))
 ```
 
 Using this merged data frame, generate an adjacency matrix for polygons:
@@ -179,6 +180,7 @@ Clean up the matrix to include only edges with a value of 2 or more:
 sum_matrix <- ifelse(sum_matrix > 1, 1, 0)
 rownames(sum_matrix) <- rownames(intersection_matrix)
 colnames(sum_matrix) <- colnames(intersection_matrix)
+# saveRDS(sum_matrix, file = here::here("data/sum_matrix.rds"))
 ```
 
 Generate a graph from this matrix
@@ -225,34 +227,3 @@ ggplot() +
   scale_color_manual(values = mycolors)
  
 ```
-
-
-## Wrapping into functions
-
-First, wrap the geospatial functions into programmatic solutions:
-
-```{r}
-get_country_provinces <- function(iso3_code) {
-  if (!is.character(iso3_code)) {
-    stop("iso3_code must be a character",
-         call. = FALSE)
-  }
-  sf::st_as_sf(
-    raster::getData(
-      "GADM", country = iso3_code, level = 1
-      )
-               )
-}
-
-get_country_cities <- function(iso3_code) {
-  ### TO DO:
-  # Match the city df with the ISO code for subsetting
-  ###
-}
-```
-
-
-
-
-
-

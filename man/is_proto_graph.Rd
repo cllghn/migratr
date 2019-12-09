@@ -2,13 +2,13 @@
 % Please edit documentation in R/s3.R
 \name{is_proto_graph}
 \alias{is_proto_graph}
-\title{Is this object a proto_net?}
+\title{Is this object a \code{proto_graph}?}
 \usage{
 is_proto_graph(x)
 }
 \arguments{
-\item{pn}{An R object.}
+\item{x}{An R object.}
 }
 \description{
-Logical test for proto_net objects.
+Logical test for proto_graph objects.
 }
