@@ -19,7 +19,7 @@ get_proto_graph(edges, nodes, directed = FALSE, centroid = TRUE)
 Produce a \code{proto_graph} object that can be laid as a network, map, or geocoded network on a map.
 }
 \details{
-\code{nodes} must be a \code{data.frame} with vertex metadata. THe first column of the table is assume to contain the symbolic vertex names, this will be added to the graphs as the 'name' vertex attribute. Additionally, as an object of class \code{sf} it must include the intended geometry for each vertex.
+\code{nodes} must be a \code{data.frame} with vertex metadata. The first column of the table is assume to contain the symbolic vertex names, this will be added to the graphs as the 'name' vertex attribute. Additionally, as an object of class \code{sf} it must include the intended geometry for each vertex.
 
 \code{centroid} is used to calculate the geographic position of each node when the network is represented on a map. As a default, the argument is set to \code{TRUE} and will calculate the centroid for the provided geometry. If \code{FALSE} the user will have to provide a node latitude and longitude for graphing.
 }

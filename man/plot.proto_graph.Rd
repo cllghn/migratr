@@ -4,7 +4,7 @@
 \alias{plot.proto_graph}
 \title{\code{proto_graph} Plot Method}
 \usage{
-\method{plot}{proto_graph}(x, .xlab = "", .ylab = "", ...)
+plot.proto_graph(x, .xlab = "", .ylab = "", ...)
 }
 \arguments{
 \item{x}{A class \code{proto_graph} object}

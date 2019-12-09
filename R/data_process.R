@@ -12,7 +12,7 @@
 #' @importFrom igraph graph_from_data_frame
 #' 
 #' @details 
-#' \code{nodes} must be a \code{data.frame} with vertex metadata. THe first column of the table is assume to contain the symbolic vertex names, this will be added to the graphs as the 'name' vertex attribute. Additionally, as an object of class \code{sf} it must include the intended geometry for each vertex.
+#' \code{nodes} must be a \code{data.frame} with vertex metadata. The first column of the table is assume to contain the symbolic vertex names, this will be added to the graphs as the 'name' vertex attribute. Additionally, as an object of class \code{sf} it must include the intended geometry for each vertex.
 #' 
 #' \code{centroid} is used to calculate the geographic position of each node when the network is represented on a map. As a default, the argument is set to \code{TRUE} and will calculate the centroid for the provided geometry. If \code{FALSE} the user will have to provide a node latitude and longitude for graphing.
 #' 
@@ -60,7 +60,7 @@ get_proto_graph <- function(edges, nodes, directed = FALSE, centroid = TRUE) {
                        call. = FALSE) 
                   }
                 get_geo_edges(edges = edges,
-                              nodes = nodes,
+                              nodes = add_centroid(nodes),
                               .centroid_latitude  = 'centroid_latitude',
                               .centroid_longitude = 'centroid_longitude')
                 }
@@ -131,7 +131,7 @@ get_geo_edges <- function(edges, nodes, .centroid_latitude, .centroid_longitude)
   nodes_temp <- nodes %>%
     select(!!!out_cols) %>%
     set_names( c("id", "latitude", "longitude") )
-  print(nodes_temp)
+  #print(nodes_temp)
   
   edges_temp <- edges[1:2]
   colnames(edges_temp) <- c("from", "to")

@@ -1,0 +1,63 @@
+---
+output: 
+  github_document:
+    html_preview: true
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  fig.align = "center",
+  comment   = "#>"
+)
+
+knitr::opts_chunk$set(
+  echo      = TRUE)
+
+```
+
+## **{migratr}**
+
+A set of tools for unifying **{sf}** and **{igraph}** object for geospatial network analysis.
+
+## Example
+
+The goal is to create representations of network both projected over a map or as a sociogram. Because the network is the unit of analysis, the functions are designed to work with both a edge and node list.
+
+First, load the package and any other tools you may require (I suggest using **{tidyverse}** tools for data manipulation):
+```{r, warning=FALSE, message=FALSE}
+library(migratr)
+library(tidyverse)
+```
+
+Now load the sample node and edge lists:
+```{r}
+edges <- migratr::edgelist
+nodes <- migratr::nodelist
+```
+
+  - Edges list: A `data.frame` containing a symbolic edge list in the first two columns. Additional columns are considered as edge attributes.
+```{r}
+edges %>%
+  glimpse()
+```
+
+  - Nodes list: A `data.frame` and `sf` class object with node metadata. The first column will be assumed to contain the symbolic vertex names. 
+```{r}
+nodes %>% 
+  glimpse()
+```
+
+Using the edge and node list produce a new object with relationships and geographic data:
+
+```{r, message=FALSE, warning=FALSE}
+migratr_object <- migratr::get_proto_graph(edges = edges[edges["edge_type"] == "Adjacency/Population",],
+                                         nodes = nodes)
+migratr_object
+```
+
+Plot `migratr_object`:
+```{r}
+plot(migratr_object)
+```
+
