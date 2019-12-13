@@ -1,7 +1,7 @@
 ---
 output: 
   github_document:
-    html_preview: true
+    html_preview: false
 ---
 
 ```{r setup, echo = FALSE}
@@ -33,12 +33,7 @@ Proceed to install **{migratr}** from Github:
 remotes::install_github("cjcallag/migratr")
 ```
 
-<<<<<<< HEAD
 ## Example: All Populations
-=======
-
-## Example
->>>>>>> 4e7071ce16ebdd4f243a03cec1e7652cbd1ba98f
 
 The goal is to create representations of network both projected over a map or as a sociogram. Because the network is the unit of analysis, the functions are designed to work with both a edge and node list.
 

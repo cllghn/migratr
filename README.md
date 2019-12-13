@@ -18,11 +18,7 @@ Proceed to install **{migratr}** from Github:
 remotes::install_github("cjcallag/migratr")
 ```
 
-<<<<<<< HEAD
 ## Example: All Populations
-=======
-## Example
->>>>>>> 4e7071ce16ebdd4f243a03cec1e7652cbd1ba98f
 
 The goal is to create representations of network both projected over a
 map or as a sociogram. Because the network is the unit of analysis, the
@@ -94,7 +90,6 @@ plot(migratr_object)
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
-<<<<<<< HEAD
 
 ## Example: The Kurds
 
@@ -146,5 +141,3 @@ plot(migratr_object)
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
-=======
->>>>>>> 4e7071ce16ebdd4f243a03cec1e7652cbd1ba98f
