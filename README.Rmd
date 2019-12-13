@@ -33,8 +33,7 @@ Proceed to install **{migratr}** from Github:
 remotes::install_github("cjcallag/migratr")
 ```
 
-
-## Example
+## Example: All Populations
 
 The goal is to create representations of network both projected over a map or as a sociogram. Because the network is the unit of analysis, the functions are designed to work with both a edge and node list.
 
@@ -52,21 +51,19 @@ nodes <- migratr::nodelist
 
   - Edges list: A `data.frame` containing a symbolic edge list in the first two columns. Additional columns are considered as edge attributes.
 ```{r}
-edges %>%
-  glimpse()
+glimpse(edges)
 ```
 
   - Nodes list: A `data.frame` and `sf` class object with node metadata. The first column will be assumed to contain the symbolic vertex names. 
 ```{r}
-nodes %>% 
-  glimpse()
+glimpse(nodes)
 ```
 
 Using the edge and node list produce a new object with relationships and geographic data:
 
 ```{r, message=FALSE, warning=FALSE}
 migratr_object <- migratr::get_proto_graph(edges = edges[edges["edge_type"] == "Adjacency/Population",],
-                                         nodes = nodes)
+                                           nodes = nodes)
 migratr_object
 ```
 
@@ -75,3 +72,26 @@ Plot `migratr_object`:
 plot(migratr_object)
 ```
 
+
+## Example: The Kurds
+
+Load required data:
+```{r}
+edges <- migratr::kurds_edgelist
+glimpse(edges)
+nodes <- migratr::kurds_nodelist
+glimpse(nodes)
+```
+
+Using the edge and node list produce a new object with relationships and geographic data:
+
+```{r, message=FALSE, warning=FALSE}
+migratr_object <- migratr::get_proto_graph(edges = edges,
+                                           nodes = nodes)
+migratr_object
+```
+
+Plot `migratr_object`:
+```{r}
+plot(migratr_object)
+```
